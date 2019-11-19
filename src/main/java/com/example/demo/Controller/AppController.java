@@ -77,7 +77,8 @@ public class AppController {
         if(num != 3) {
             JSONObject jsonObject = jsonArray.getJSONObject(num);
             if (jsonObject.getString("state").equals("2")) {
-                log.info(jsonObject.getString("state"));
+                log.info(jsonArray.toJSONString());
+                log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
                 num++;
                 return "2";
             }
