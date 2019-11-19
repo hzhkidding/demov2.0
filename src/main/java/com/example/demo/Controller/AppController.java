@@ -35,7 +35,7 @@ public class AppController {
     AppService appService;
     public JSONArray deviceListArray;
 
-    private static String appInstanceId;
+    public String appInstanceId;
     public Double X;
     public Double Y;
 
@@ -60,8 +60,8 @@ public class AppController {
     public String appInvoke(Model model) {
         //  String appInstanceId = this.appInstanceId;
 
-        new Thread() {
-            public void run() {
+        new Thread(){
+            public void run(){
                 appService.appInvoke();
             }
         }.start();
@@ -77,6 +77,7 @@ public class AppController {
         if(num != 3) {
             JSONObject jsonObject = jsonArray.getJSONObject(num);
             if (jsonObject.getString("state").equals("2")) {
+                log.info(jsonObject.getString("state"));
                 num++;
                 return "2";
             }
