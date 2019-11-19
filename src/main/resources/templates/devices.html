@@ -120,7 +120,8 @@
             MaxRound = rectLong;
             ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
             // 设置设备名称
-            ctx.fillText("设备", deviceList[i][0], deviceList[i][1] + 35, deviceList[i][1] + rectLong);
+            console.log(deviceList[i][4]);
+            ctx.fillTex(deviceList[i][4], deviceList[i][0], deviceList[i][1] + 35, deviceList[i][1] + rectLong);
             ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
         }
