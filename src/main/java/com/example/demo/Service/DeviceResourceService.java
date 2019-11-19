@@ -74,10 +74,6 @@ DeviceResourceService {
         json.put("value", room);
 
         labelSelector.add(json);
-       /* JSONObject kind = new JSONObject();
-        json.put("key","io.fusionapp/kind");
-        json.put("op","Eq");
-        json.put("value","Human");*/
         selectorJson.put("labelSelector", labelSelector);
         String deviceResourceInfo = httpInvoke.exchange(selectorJson.toJSONString(), DEVICE_RESOURCE_URL);
         JSONArray deviceResourceJsonArray = JSONObject.parseArray(deviceResourceInfo);

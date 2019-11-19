@@ -25,6 +25,7 @@ import static com.example.demo.Util.Constans.APP_STATUS_URL;
 @Slf4j
 @Controller
 public class AppController {
+    private String appId;
 
    private int num = 0;
     @Autowired
@@ -50,8 +51,11 @@ public class AppController {
 
     @RequestMapping(path = {"/appInstance"}, method = RequestMethod.POST)
     public String appInstance(@RequestParam("appId") String appId, @RequestParam("userId") String userId) {
-        if (appId.equals("5dcfe456f6169f7f8ded2cb7"))
+        if (appId.equals("5dcfe456f6169f7f8ded2cb7")){
+            this.appId = "5dcfe456f6169f7f8ded2cb7";
+            appService.appInstance(appId, userId, this.X, this.Y);
             return "run";
+        }
         appService.appInstance(appId, userId, this.X, this.Y);
         return "about";
     }
@@ -65,6 +69,8 @@ public class AppController {
                 appService.appInvoke();
             }
         }.start();
+        if(this.appId.equals("5dcfe456f6169f7f8ded2cb7"))
+            return "runRunning";
         return "appRunning";
     }
 

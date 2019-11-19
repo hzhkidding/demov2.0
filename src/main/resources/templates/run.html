@@ -77,7 +77,7 @@
                 </div>
 
 
-                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed2()">确定</a>
+                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed()">确定</a>
 
                 <div class="clearfix"></div>
                 <!--                <div class="scrolltop radius20"><a onClick="jQuery('html, body').animate( { scrollTop: 0 }, 'slow' );"  href="javascript:void(0);">-->
@@ -136,10 +136,10 @@
 
                 var r = confirm("竞拍价为" + result + " , 是否接受？");
                 if (r == true) {
-                    // window.location.href = "/appInvoke";
-                    setTimeout("test1()","2000");
+                     window.location.href = "/appInvoke";
+                  /*  setTimeout("test1()","2000");
                     setTimeout("test2()","2000");
-                    setTimeout("test3()","2000");
+                    setTimeout("test3()","2000");*/
 
 
                 } else {
@@ -156,7 +156,7 @@
                 var num=4;
                 var r = confirm("当前竞拍人数为"+num+", 竞拍价为" + result + " , 是否接受？");
                 if (r == true) {
-                    // window.location.href = "/appInvoke";
+                     window.location.href = "/appInvoke";
                     setTimeout("test1()","2000");
                     setTimeout("test2()","5000");
                     setTimeout("test3()","8000");
