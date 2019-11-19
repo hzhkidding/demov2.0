@@ -87,7 +87,7 @@
 
         .content {
             width: 300px;
-            height: 300px;
+            height: 150px;
 
             margin: 0 auto; /*水平居中*/
             position: relative;
@@ -134,12 +134,15 @@
 
             <div class="logo"><a href="#">人机物平台初始化</a></div>
 
-
+            <div align="center"><img src="images/front.jpg" /></div>
             <div class="content">
                 <label id="lblSelect">
                     <select id="selectPointOfInterest" title="Select points of interest nearby">
                         <option>请选择平台</option>
-                        <option value="/collect">人机物融合云计算平台</option>
+<!--                        <option value="/collect">人机物融合云计算平台</option>-->
+                        <option value="/collect">人机物融合智慧城市平台</option>
+                        <option value="/collect">人机物融合工业互联网平台</option>
+
 
                     </select>
                 </label>
@@ -150,11 +153,11 @@
                 var myselect = document.getElementById("selectPointOfInterest");
                 var index = myselect.selectedIndex;
                 var html = myselect.options[1].value;
+
                 function collect() {
-                    window.setTimeout("window.location=html",0);
+                    window.setTimeout("window.location=html", 0);
                 }
             </script>
-
 
 
         </div>
