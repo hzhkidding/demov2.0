@@ -194,14 +194,15 @@
     function sendNeed3() {
         setInterval("getStatus1()", 500);
 
-        setInterval("getStatus2()", 500);
-
-        setInterval("getStatus3()", 500);
+        // setInterval("getStatus2()", 500);
+        //
+        // setInterval("getStatus3()", 500);
 
     }
     function getStatus1() {
+        var exist=false;
         $.ajax({
-            url: '/test2',
+            url: '/getStatus',
             async: false,
             // 请求方式
             type: "get",
@@ -216,52 +217,16 @@
             success: function (result) {
                 if (result == "2") {
                     test1();
+                    exist = true;
+                    return ;
                 }
             }
-        })
+        });
+        if(exist){
+            return ;
+        }
     }
-    function getStatus2() {
-        $.ajax({
-            url: '/test2',
-            async: false,
-            // 请求方式
-            type: "get",
-            // contentType
-            contentType: "application/json",
-            // dataType
-            dataType: "json",
-            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
-            // 把JS的对象或数组序列化一个json 字符串
-            // data: JSON.stringify(jsonData),
-            // result 为请求的返回结果对象
-            success: function (result) {
-                if (result == "2") {
-                    test2();
-                }
-            }
-        })
-    }
-    function getStatus3() {
-        $.ajax({
-            url: '/test2',
-            async: false,
-            // 请求方式
-            type: "get",
-            // contentType
-            contentType: "application/json",
-            // dataType
-            dataType: "json",
-            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
-            // 把JS的对象或数组序列化一个json 字符串
-            // data: JSON.stringify(jsonData),
-            // result 为请求的返回结果对象
-            success: function (result) {
-                if (result == "2") {
-                    test3();
-                }
-            }
-        })
-    }
+
 
 
 </script>
