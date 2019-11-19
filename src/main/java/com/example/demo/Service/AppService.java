@@ -61,12 +61,12 @@ public class AppService {
         return appDetailJsonObj;
     }*/
     //应用实例化
-    public String appInstance(String appId,String userId,String X,String Y){
+    public String appInstance(String appId,String userId,Double X,Double Y){
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_class_id",appId);
         map.add("user_id",userId);
-        map.add("x",X);
-        map.add("y",Y);
+        map.add("x",String.valueOf(X));
+        map.add("y",String.valueOf(Y));
       //  ResponseEntity<String> entity = postInvoke(map,APP_INSTANCE_URL);
         String appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);

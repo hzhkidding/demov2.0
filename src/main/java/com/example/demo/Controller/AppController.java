@@ -24,8 +24,8 @@ public class AppController {
     public JSONArray deviceListArray;
 
     private static String appInstanceId;
-    public String X;
-    public String Y;
+    public Double X;
+    public Double Y;
 
     @RequestMapping(path = {"/getAppList"}, method = RequestMethod.GET)
     public String getAllAppList(Model model) {

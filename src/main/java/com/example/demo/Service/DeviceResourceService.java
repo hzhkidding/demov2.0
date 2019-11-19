@@ -23,6 +23,7 @@ import static com.example.demo.Util.Constans.*;
 @Slf4j
 @Service
 public class DeviceResourceService {
+    String room = "";
     public String testJson = "{\n" +
             " \"labelSelector\": [\n" +
             "  { \"key\": \"io.fusionapp/kind\", \"op\": \"Eq\", \"value\": \"smarthome\" } \n" +
@@ -53,19 +54,30 @@ public class DeviceResourceService {
       //  log.info(phoneInfo);
         JSONObject labelXY = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
      //   System.out.println("hahahh"+labelXY.toJSONString());
-        appController.X =  labelXY.getString("x");
-        appController.Y = labelXY.getString("y");
-        log.info("获取"+labelXY);
-        String id = labelXY.getString("id");
-        String room = labelXY.getString("room");
+        Double x = Double.valueOf(labelXY.getString("x"));
+        Double y = Double.valueOf(labelXY.getString("y"));
 
+        appController.X =  x;
+        appController.Y = y;
+      //  log.info("获取"+labelXY);
+        String id = labelXY.getString("id");
         JSONObject selectorJson = new JSONObject();
         JSONArray labelSelector = new JSONArray();
         JSONObject json = new JSONObject();
         json.put("key", "io.fusionapp/pos");
         json.put("op", "Eq");
+
+        if(x>=0.0462&&x<=0.0552&y>=0.3407&y<=0.4049){
+            room = "110";
+        }else if(x>=0.5747&&x<=0.7218&y>=0.5457&y<=0.5481){
+            room  = "111";
+
+        }else{
+            room = "111";
+        }
         log.info(room);
         json.put("value", room);
+
         labelSelector.add(json);
         selectorJson.put("labelSelector", labelSelector);
         String deviceResourceInfo = httpInvoke.exchange(selectorJson.toJSONString(), DEVICE_RESOURCE_URL);
