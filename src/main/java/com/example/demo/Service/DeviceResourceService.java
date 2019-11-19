@@ -83,6 +83,7 @@ public class DeviceResourceService {
             device.setX(labelJson.getDouble("x"));
             device.setY(labelJson.getDouble("y"));
             device.setStatus(deviceObject.getString("phase"));
+            device.setDeviceName(deviceObject.getString("aliasName"));
             devicesList.add(device);
         }
         return devicesList;
