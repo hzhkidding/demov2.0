@@ -80,7 +80,8 @@ public class AppController {
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_instance_id",appService.appInstanceId);
         JSONArray jsonArray = JSONArray.parseArray(httpInvoke.postInvoke(map,APP_STATUS_URL));
-        if(num != 3) {
+
+        if(num != jsonArray.size()) {
             JSONObject jsonObject = jsonArray.getJSONObject(num);
             if (jsonObject.getString("state").equals("2")) {
                 log.info(jsonArray.toJSONString());

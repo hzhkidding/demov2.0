@@ -48,8 +48,11 @@ public class AppService {
         for(int i=0;i<appJsonArray.size();i++){
             JSONObject appJsonObj = appJsonArray.getJSONObject(i);
             App app= new App();
-            app.setId(appJsonObj .getString("_id"));
             JSONObject appProperties = (JSONObject) appJsonObj.get("properties");
+            if(appProperties.getString("process_author").equals("0")){
+                continue;
+            }
+            app.setId(appJsonObj .getString("_id"));
             app.setName(appProperties.getString("name"));
             app.setProcess_author(appProperties.getString("v"));
             app.setProcess_id(appProperties.getString("process_id"));
