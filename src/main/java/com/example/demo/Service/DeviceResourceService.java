@@ -22,7 +22,8 @@ import static com.example.demo.Util.Constans.*;
 
 @Slf4j
 @Service
-public class DeviceResourceService {
+public class
+DeviceResourceService {
     String room = "";
     public String testJson = "{\n" +
             " \"labelSelector\": [\n" +
