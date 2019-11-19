@@ -41,7 +41,7 @@
         }
     </script>
 </head>
-<body>
+<body onpageshow="sendNeed3()">
 <div id="wrapper">
 
     <div id="content">
@@ -59,11 +59,27 @@
 
 
                 <div class="toogle_wrap radius8">
-                    <iframe src="https://www.cpss2019.fun:8899/tpl/select-resource.html" frameborder="0" width="300" scrolling="No" height="200" leftmargin="0" topmargin="0"></iframe>
+                    <div class="trigger"><a href="#">可用资源列表</a></div>
+
+                    <div class="toggle_container">
+                        <ul class="listing_detailed myul">
+
+                            <li id="mkcoffee">制作咖啡</li>
+                            <li id="donecoffee">咖啡制作完成</li>
+                            <li id="sendcoffe">送咖啡</li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <h4>请选择需求度：0~1</h4>
+                <div class="mydiv">
+                    <input class="input-lg myslide" type="range" id="nd" min="0" max="1" step="0.01">
+                    <div class="mydiv" id="result"></div>
                 </div>
 
 
-                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed()">确定</a>
+                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed3()">确定</a>
 
                 <div class="clearfix"></div>
                 <!--                <div class="scrolltop radius20"><a onClick="jQuery('html, body').animate( { scrollTop: 0 }, 'slow' );"  href="javascript:void(0);">-->
@@ -100,8 +116,31 @@
 </script>
 
 <script>
+    function test1() {
+        // console.log(document.getElementById("mkcoffee").innerText);
+        document.getElementById("mkcoffee").innerHTML = " 制作咖啡    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+    }
+
+    function test2() {
+        // console.log(document.getElementById("mkcoffee").innerText);
+        document.getElementById("donecoffee").innerHTML = " 咖啡制作完成    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+    }
+
+    function test3() {
+        // console.log(document.getElementById("mkcoffee").innerText);
+        document.getElementById("sendcoffe").innerHTML = " 送咖啡    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+    }
+
+
     function sendNeed() {
-        var jsonData = {"baseprice": 36, "demand": 0.5, "id": 2, "num": 4};
+
+        var Demand = document.getElementById("nd").value;
+        console.log(Demand);
+
+        var jsonData = {"baseprice": 36, "demand": Demand, "id": 2, "num": 4};
 
         $.ajax({
             url: '/sendNeed',
@@ -118,6 +157,9 @@
             // result 为请求的返回结果对象
             success: function (result) {
                 // alert(result);
+                var obj = JSON.parse(str);
+                console.log(obj.totalPrice);
+                console.log(obj.num);
 
                 var r = confirm("竞拍价为" + result + " , 是否接受？");
                 if (r == true) {
@@ -130,6 +172,48 @@
             }
         })
     }
+
+
+
+
+    function sendNeed3() {
+
+
+        setInterval("getStatus1()", 1000);
+
+        // setInterval("getStatus2()", 500);
+        //
+        // setInterval("getStatus3()", 500);
+
+    }
+    function getStatus1() {
+        var exist=false;
+        $.ajax({
+            url: '/getStatus',
+            async: false,
+            // 请求方式
+            type: "get",
+            // contentType
+            contentType: "application/json",
+            // dataType
+            dataType: "json",
+            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
+            // 把JS的对象或数组序列化一个json 字符串
+            // data: JSON.stringify(jsonData),
+            // result 为请求的返回结果对象
+            success: function (result) {
+                if (result == "2") {
+                    test1();
+                    exist = true;
+                    return ;
+                }
+            }
+        });
+        if(exist){
+            return ;
+        }
+    }
+
 
 
 </script>

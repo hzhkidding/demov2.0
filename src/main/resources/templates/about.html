@@ -79,7 +79,7 @@
                 </div>
 
 
-                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed3()">确定</a>
+                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed()">确定</a>
 
                 <div class="clearfix"></div>
                 <!--                <div class="scrolltop radius20"><a onClick="jQuery('html, body').animate( { scrollTop: 0 }, 'slow' );"  href="javascript:void(0);">-->
@@ -192,40 +192,75 @@
 
 
     function sendNeed3() {
-        setInterval("getStatus1()", 500);
+        var Demand = document.getElementById("nd").value;
+        console.log(Demand);
 
-        // setInterval("getStatus2()", 500);
-        //
-        // setInterval("getStatus3()", 500);
-
-    }
-    function getStatus1() {
-        var exist=false;
+        var jsonData = {"baseprice": 36, "demand": Demand, "id": 2, "num": 4};
         $.ajax({
-            url: '/getStatus',
-            async: false,
+            url: '/sendNeed',
+            async: true,
             // 请求方式
-            type: "get",
+            type: "post",
             // contentType
             contentType: "application/json",
             // dataType
             dataType: "json",
             //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
             // 把JS的对象或数组序列化一个json 字符串
-            // data: JSON.stringify(jsonData),
+            data: JSON.stringify(jsonData),
             // result 为请求的返回结果对象
             success: function (result) {
-                if (result == "2") {
-                    test1();
-                    exist = true;
-                    return ;
+                // alert(result);
+                var obj = JSON.parse(str);
+                console.log(obj.totalPrice);
+                console.log(obj.num);
+
+                var r = confirm("竞拍价为" + result + " , 是否接受？");
+                if (r == true) {
+                    window.location.href = "/appInvoke";
+                } else {
+                    alert("再见");
+                    // window.location.href = "/app";
                 }
+
             }
-        });
-        if(exist){
-            return ;
-        }
+        })
+
+
+        // setInterval("getStatus1()", 500);
+
+        // setInterval("getStatus2()", 500);
+        //
+        // setInterval("getStatus3()", 500);
+
     }
+    // function getStatus1() {
+    //     var exist=false;
+    //     $.ajax({
+    //         url: '/getStatus',
+    //         async: false,
+    //         // 请求方式
+    //         type: "get",
+    //         // contentType
+    //         contentType: "application/json",
+    //         // dataType
+    //         dataType: "json",
+    //         //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
+    //         // 把JS的对象或数组序列化一个json 字符串
+    //         // data: JSON.stringify(jsonData),
+    //         // result 为请求的返回结果对象
+    //         success: function (result) {
+    //             if (result == "2") {
+    //                 test1();
+    //                 exist = true;
+    //                 return ;
+    //             }
+    //         }
+    //     });
+    //     if(exist){
+    //         return ;
+    //     }
+    // }
 
 
 
