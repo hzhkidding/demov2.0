@@ -6,11 +6,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 
@@ -62,12 +64,20 @@ public class HttpInvoke {
 
     public String exchange(String json, String url) {
         RestTemplate newRestTemplate = new RestTemplate();
-        newRestTemplate.setRequestFactory(new RestTemplateConfig.HttpComponentsClientRestfulHttpRequestFactory());
+        newRestTemplate.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        MediaType type = MediaType.parseMediaType("application/json;charset=UTF-8");
 
         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(type);
+        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
+        // String json = restTemplate.postForObject("http://localhost:10013/goods/getGoodsContent", entity, String.class);
+
+        newRestTemplate.setRequestFactory(new RestTemplateConfig.HttpComponentsClientRestfulHttpRequestFactory());
+
+       /* HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
+*/
         HttpEntity<String> httpEntity = new HttpEntity<>(json, headers);
         ResponseEntity<String> responseEntity = newRestTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
         String deviceResourceInfo = responseEntity.getBody();

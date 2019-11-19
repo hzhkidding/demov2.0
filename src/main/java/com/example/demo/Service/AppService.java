@@ -103,7 +103,7 @@ public class AppService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-       restTemplate.postForEntity(APP_INVOKE_URL, request, String.class).getBody();
+        restTemplate.postForEntity(APP_INVOKE_URL, request, String.class).getBody();
       //  httpInvoke.postInvoke(map,APP_INSTANCE_URL);
     }
 
