@@ -64,7 +64,10 @@
                     <div class="toggle_container">
                         <ul class="listing_detailed myul">
 
-                            <li id="co">东菱咖啡机              未启动</li>
+                            <li id="mkcoffee">制作咖啡</li>
+                            <li id="donecoffee">咖啡制作完成</li>
+                            <li id="sendcoffe">送咖啡</li>
+
 
                         </ul>
                     </div>
@@ -76,7 +79,7 @@
                 </div>
 
 
-                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed2()">确定</a>
+                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed3()">确定</a>
 
                 <div class="clearfix"></div>
                 <!--                <div class="scrolltop radius20"><a onClick="jQuery('html, body').animate( { scrollTop: 0 }, 'slow' );"  href="javascript:void(0);">-->
@@ -114,10 +117,24 @@
 
 <script>
     function test1() {
-        console.log(document.getElementById("co").innerText);
-        document.getElementById("co").innerHTML =" 东菱咖啡机    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+        // console.log(document.getElementById("mkcoffee").innerText);
+        document.getElementById("mkcoffee").innerHTML = " 制作咖啡    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
 
     }
+
+    function test2() {
+        // console.log(document.getElementById("mkcoffee").innerText);
+        document.getElementById("donecoffee").innerHTML = " 咖啡制作完成    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+    }
+
+    function test3() {
+        // console.log(document.getElementById("mkcoffee").innerText);
+        document.getElementById("sendcoffe").innerHTML = " 送咖啡    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+    }
+
+
     function sendNeed() {
 
         var Demand = document.getElementById("nd").value;
@@ -158,13 +175,12 @@
 
     function sendNeed2() {
 
-        var result =22;
-        var num=5;
-        var r = confirm("当前竞拍人数为"+num+", 竞拍价为" + result + " , 是否接受？");
+        var result = 22;
+        var num = 5;
+        var r = confirm("当前竞拍人数为" + num + ", 竞拍价为" + result + " , 是否接受？");
         if (r == true) {
             // window.location.href = "/appInvoke";
-            setTimeout("test1()","2000");
-
+            setTimeout("test1()", "2000");
 
 
         } else {
@@ -172,6 +188,33 @@
             // window.location.href = "/app";
         }
 
+    }
+
+
+    function sendNeed3() {
+        setInterval("getStatus()", 500);
+
+    }
+    function getStatus() {
+        $.ajax({
+            url: '/test2',
+            async: false,
+            // 请求方式
+            type: "get",
+            // contentType
+            contentType: "application/json",
+            // dataType
+            dataType: "json",
+            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
+            // 把JS的对象或数组序列化一个json 字符串
+            // data: JSON.stringify(jsonData),
+            // result 为请求的返回结果对象
+            success: function (result) {
+                if (result == "2") {
+                    test1();
+                }
+            }
+        })
     }
 
 
