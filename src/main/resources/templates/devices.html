@@ -39,7 +39,7 @@
 
             <nav id="menu">
                 <div class="container">
-                    <canvas id="myCanvas" width="405" height="720" style="border: 2px solid grey"></canvas>
+                    <canvas id="myCanvas" width="395" height="405" style="border: 2px solid grey"></canvas>
                 </div>
 
             </nav><!-- <ul th:each="device:${DeviceInfo}">
@@ -77,11 +77,11 @@
 
     c7 = document.getElementById("myCanvas");
 
-    c7.width = document.documentElement.clientWidth;
-    c7.height = document.documentElement.clientHeight;
+    c7.width = document.documentElement.clientWidth-5;
+    c7.height = document.documentElement.clientWidth;
     var cW = c7.offsetWidth;    // 获取元素宽度
     var imgObj = new Image();
-    imgObj.src = "images/meeting2.png";
+    imgObj.src = "images/pku.png";
     var imgW = '';
     var imgH = '';
     var l = 20;
@@ -205,7 +205,9 @@
         // document.body.appendChild(temp);
         // temp.submit();
         //发送完成本之后，刷新页面，显示已注册。
-        window.location.reload();
+
+        setTimeout(  window.location.reload(),"1000");
+
 
     })
 
