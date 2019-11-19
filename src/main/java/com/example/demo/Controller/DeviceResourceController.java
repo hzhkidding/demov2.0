@@ -36,7 +36,7 @@ public class DeviceResourceController {
             device.add(d.getY().doubleValue());
             device.add(d.getId());
             device.add(d.getStatus());
-            device.add(d.getDeviceName());
+           // device.add(d.getDeviceName());
             devices.add(device);
         }
         model.addAttribute("DeviceList", devices);

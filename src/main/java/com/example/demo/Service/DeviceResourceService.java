@@ -56,7 +56,7 @@ public class DeviceResourceService {
      //   System.out.println("hahahh"+labelXY.toJSONString());
         Double x = Double.valueOf(labelXY.getString("x"));
         Double y = Double.valueOf(labelXY.getString("y"));
-
+        log.info("x轴:"+x+"y轴"+y);
         appController.X =  x;
         appController.Y = y;
       //  log.info("获取"+labelXY);
@@ -83,7 +83,7 @@ public class DeviceResourceService {
         String deviceResourceInfo = httpInvoke.exchange(selectorJson.toJSONString(), DEVICE_RESOURCE_URL);
         JSONArray deviceResourceJsonArray = JSONObject.parseArray(deviceResourceInfo);
         List<Device> devicesList = new ArrayList<>();
-        /**
+        /**f
          * 设置设备List的属性，返回给controller
          */
         for (int i = 0; i < deviceResourceJsonArray.size(); i++) {
