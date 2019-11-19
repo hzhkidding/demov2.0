@@ -69,6 +69,7 @@ public class AppController {
     }
 
     @RequestMapping(path = {"/getStatus"}, method = RequestMethod.GET)
+    @ResponseBody
     public String getStatus() {
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_instance_id",appService.appInstanceId);
