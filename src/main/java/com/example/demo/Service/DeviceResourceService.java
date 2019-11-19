@@ -62,8 +62,9 @@ public class DeviceResourceService {
         JSONObject selectorJson = new JSONObject();
         JSONArray labelSelector = new JSONArray();
         JSONObject json = new JSONObject();
-        json.put("key", "io.fusionapp/kind");
+        json.put("key", "io.fusionapp/pos");
         json.put("op", "Eq");
+        log.info(room);
         json.put("value", room);
         labelSelector.add(json);
         selectorJson.put("labelSelector", labelSelector);
