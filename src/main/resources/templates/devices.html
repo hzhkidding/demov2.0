@@ -39,7 +39,7 @@
 
             <nav id="menu">
                 <div class="container">
-                    <canvas id="myCanvas" width="395" height="405" style="border: 2px solid grey"></canvas>
+                    <canvas id="myCanvas" width="433" height="405" style="border: 2px solid grey"></canvas>
                 </div>
 
             </nav><!-- <ul th:each="device:${DeviceInfo}">
@@ -77,20 +77,24 @@
 
     c7 = document.getElementById("myCanvas");
 
-    c7.width = document.documentElement.clientWidth-5;
+    c7.width = document.documentElement.clientWidth - 5;
     c7.height = document.documentElement.clientWidth;
     var cW = c7.offsetWidth;    // 获取元素宽度
     var imgObj = new Image();
     imgObj.src = "images/pku.png";
     var imgW = '';
     var imgH = '';
+
     var l = 20;
     // imgObj.onload
     var MaxRound;
     imgObj.onload = function () {
         //图片尺寸自适应，与用户可视区域一致
+
         imgW = c7.width;
         imgH = c7.height;
+        console.log(imgW, imgH);
+        console.log(imgObj.width, imgObj.height);
         var ctx7 = c7.getContext("2d");
 
         //绘制背景平面图
@@ -113,10 +117,10 @@
             ctx.fillStyle = colorList[deviceList[i][3]];
             // 渲染位置
             var rectLong = 25;
-            MaxRound=rectLong;
+            MaxRound = rectLong;
             ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
             // 设置设备名称
-            ctx.fillText("设备", deviceList[i][0],deviceList[i][1]+35, deviceList[i][1] + rectLong);
+            ctx.fillText("设备", deviceList[i][0], deviceList[i][1] + 35, deviceList[i][1] + rectLong);
             ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
         }
@@ -166,7 +170,7 @@
 
                 var exprice = prompt("建议起拍价为 " + result + " ,请输入您的起拍价", result);
                 if (exprice != null && exprice != "") {
-                    var jsonPrice = {"exPrice": exprice, "deviceId": deviceNo,"status": "Pending"};
+                    var jsonPrice = {"exPrice": exprice, "deviceId": deviceNo, "status": "Pending"};
 
                     $.ajax({
                         url: '/sendExPrice',
@@ -192,7 +196,7 @@
 
             }
         })
-        setTimeout(  window.location.reload(),"1000");
+        setTimeout(window.location.reload(), "1000");
 
         // var temp = document.createElement("form");
         // temp.action = "/sendCost";
@@ -208,16 +212,18 @@
         // temp.submit();
         //发送完成本之后，刷新页面，显示已注册。
 
-        setTimeout(  window.location.reload(),"1000");
+        setTimeout(window.location.reload(), "1000");
 
 
     })
 
     //坐标变换
-    function XYMap(OriginX, OringY, width, height) {
+    function XYMap(OriginX, OriginY, width, height) {
         var newX, newY;
-        newY = OriginX * height;
-        newX = width - OringY * width;
+        // newY = OriginX * height;
+        // newX = width - OringY * width;
+        newX = OriginX * width;
+        newY = OriginY * height;
 
         return [newX, newY];
     }
