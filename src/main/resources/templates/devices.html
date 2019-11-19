@@ -139,6 +139,7 @@
         var y = (e.clientY - canvas.getBoundingClientRect().top);
         //寻找当前点击点，是属于什么设备
         var cost;
+        var deviceNo;
         for (var i = 0; i < deviceList.length; i++) {
             if (x >= deviceList[i][0] && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1] && y <= deviceList[i][1] + MaxRound) {
                 deviceNo = deviceList[i][2];
