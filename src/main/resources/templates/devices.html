@@ -116,12 +116,13 @@
             //渲染颜色
             ctx.fillStyle = colorList[deviceList[i][3]];
             // 渲染位置
-            var rectLong = 25;
+            var rectLong = 30;
             MaxRound = rectLong;
             ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
             // 设置设备名称
-            console.log(deviceList[i][4]);
-            ctx.fillTex(deviceList[i][4], deviceList[i][0], deviceList[i][1] + 35, deviceList[i][1] + rectLong);
+
+            console.log(deviceList[i][4].length);
+            ctx.fillText(deviceList[i][4], deviceList[i][0]-10, deviceList[i][1] + 40, deviceList[i][1] + rectLong);
             ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
         }
