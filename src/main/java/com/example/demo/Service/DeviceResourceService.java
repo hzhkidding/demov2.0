@@ -50,13 +50,14 @@ public class DeviceResourceService {
         /**
          * 传递wifi信号强度
          */
-        log.info(phoneInfo);
+      //  log.info(phoneInfo);
         JSONObject labelXY = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
-        System.out.println("hahahh"+labelXY.toJSONString());
+     //   System.out.println("hahahh"+labelXY.toJSONString());
         appController.X =  labelXY.getString("x");
         appController.Y = labelXY.getString("y");
-
         log.info("获取"+labelXY);
+        String id = labelXY.getString("id");
+        String room = labelXY.getString("room");
 
         JSONObject selectorJson = new JSONObject();
         JSONArray labelSelector = new JSONArray();

@@ -34,6 +34,7 @@ public class PhoneInfoController {
         jsonInfo.put("longitude",0);
         jsonInfo.put("rssi",phoneInfo.get("result"));
         this.phoneInfo = jsonInfo.toJSONString();
+      //  log.info(this.phoneInfo);
         if(flag == 1) {
             log.info(this.phoneInfo);
             flag = 0;
