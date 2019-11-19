@@ -49,18 +49,24 @@ public class ResourcePriceController {
     @ResponseBody
     public void sendExPrice(@RequestBody String jsonObject) throws JsonProcessingException {
         JSONObject exPriceJsonObj = JSONObject.parseObject(jsonObject);
+
+        String expricejson = exPriceJsonObj.toJSONString();
+        System.out.println("sendExprice" + expricejson);
         JSONObject deviceId = exPriceJsonObj.getJSONObject("deviceId");
+        System.out.println(deviceId);
         JSONObject finalJson = new JSONObject();
         JSONObject refResource = new JSONObject();
-        refResource.put("kind", "Edge");
-        refResource.put("name", deviceId.getString("name"));
+        refResource.put("kind","Edge");
+        refResource.put("name",deviceId.getString("name"));
         JSONObject resourceSpec = new JSONObject();
-        resourceSpec.put("phase", "Pending");
+        resourceSpec.put("probeEnabled",true);
         JSONObject labels = new JSONObject();
-        labels.put("io.fusionapp.smarthome.coffeepot/price", exPriceJsonObj.getString("exPrice"));
-        resourceSpec.put("labels", labels);
-        finalJson.put("refResource", refResource);
-        finalJson.put("resourceSpec", resourceSpec);
+        labels.put("io.fusionapp.smarthome.coffeepot/price",exPriceJsonObj.getString("exPrice"));
+        resourceSpec.put("labels",labels);
+        finalJson.put("refResource",refResource);
+        finalJson.put("resourceSpec",resourceSpec);
+        System.out.println("最终json"+finalJson);
+
 
         resourcePriceService.sendExPrice(finalJson);
     }

@@ -56,6 +56,7 @@ public class DeviceResourceService {
      //   System.out.println("hahahh"+labelXY.toJSONString());
         Double x = Double.valueOf(labelXY.getString("x"));
         Double y = Double.valueOf(labelXY.getString("y"));
+        String room = labelXY.getString("room");
         log.info("x轴:"+x+"y轴"+y);
         appController.X =  x;
         appController.Y = y;
@@ -66,19 +67,16 @@ public class DeviceResourceService {
         JSONObject json = new JSONObject();
         json.put("key", "io.fusionapp/pos");
         json.put("op", "Eq");
-
-        if(x>=0.0462&&x<=0.0552&y>=0.3407&y<=0.4049){
+        if(room == null){
             room = "110";
-        }else if(x>=0.5747&&x<=0.7218&y>=0.5457&y<=0.5481){
-            room  = "111";
-
-        }else{
-            room = "111";
         }
-        log.info(room);
         json.put("value", room);
 
         labelSelector.add(json);
+       /* JSONObject kind = new JSONObject();
+        json.put("key","io.fusionapp/kind");
+        json.put("op","Eq");
+        json.put("value","Human");*/
         selectorJson.put("labelSelector", labelSelector);
         String deviceResourceInfo = httpInvoke.exchange(selectorJson.toJSONString(), DEVICE_RESOURCE_URL);
         JSONArray deviceResourceJsonArray = JSONObject.parseArray(deviceResourceInfo);
@@ -96,6 +94,7 @@ public class DeviceResourceService {
             device.setY(labelJson.getDouble("y"));
             device.setStatus(deviceObject.getString("phase"));
             device.setDeviceName(deviceObject.getString("aliasName"));
+            device.setKind(deviceObject.getString("kind"));
             devicesList.add(device);
         }
         return devicesList;

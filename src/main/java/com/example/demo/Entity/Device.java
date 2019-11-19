@@ -14,5 +14,6 @@ public class Device {
     private String status;
     private Number x;
     private Number y;
+    private String kind;
 
 }

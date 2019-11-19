@@ -6,19 +6,31 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.Entity.App;
 import com.example.demo.Entity.Device;
 import com.example.demo.Service.AppService;
+import com.example.demo.Util.HttpInvoke;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.demo.Util.Constans.APP_LIST_URL;
+import static com.example.demo.Util.Constans.APP_STATUS_URL;
+
 @Slf4j
 @Controller
 public class AppController {
+
+   private int num = 0;
+    @Autowired
+    HttpInvoke httpInvoke;
+
+    private String status;
     @Autowired
     AppService appService;
     public JSONArray deviceListArray;
@@ -54,6 +66,21 @@ public class AppController {
             }
         }.start();
         return "appRunning";
+    }
+
+    @RequestMapping(path = {"/getStatus"}, method = RequestMethod.GET)
+    public String getStatus() {
+        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+        map.add("app_instance_id",appService.appInstanceId);
+        JSONArray jsonArray = JSONArray.parseArray(httpInvoke.postInvoke(map,APP_STATUS_URL));
+        if(num != 3) {
+            JSONObject jsonObject = jsonArray.getJSONObject(num);
+            if (jsonObject.getString("state").equals("2")) {
+                num++;
+                return "2";
+            }
+        }
+        return "0";
     }
 
 

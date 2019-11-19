@@ -32,6 +32,9 @@ public class DeviceResourceController {
         for (Device d : deviceList) {
             List device = new ArrayList<>();
             //设置设备属性 3：Id，4：status
+            if(d.getX() == null || d.getY()==null||d.getKind().equals("Human")){
+                continue;
+            }
             device.add(d.getX().doubleValue());
             device.add(d.getY().doubleValue());
             device.add(d.getId());

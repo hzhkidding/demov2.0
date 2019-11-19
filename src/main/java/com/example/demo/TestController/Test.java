@@ -13,7 +13,6 @@ import java.util.Map;
 @Controller
 @Slf4j
 public class Test {
-    public String status;
 
     //异步请求调试
     @RequestMapping(path = {"/humanResourceRegTest"},method = RequestMethod.POST)
@@ -38,16 +37,13 @@ public class Test {
         System.out.println(jsonObject);
         return "home";
     }
-    @RequestMapping(path = {"/test2"},method = RequestMethod.GET)
+    @RequestMapping(path = {"/test2"},method = RequestMethod.PUT)
     public String test2(Model model,@RequestBody String jsonObject) {
-        if(this.status.equals("2")){
-            return "2";
-        }
+
         return "home";
     }
-    @RequestMapping(path = {"/test3"},method = RequestMethod.POST)
-    public String test3(Model model,@RequestParam("status") String s) {
-        this.status = s;
+    @RequestMapping(path = {"/test3"},method = RequestMethod.PUT)
+    public String test3(Model model,@RequestBody String jsonObject) {
 
         return "home";
     }
