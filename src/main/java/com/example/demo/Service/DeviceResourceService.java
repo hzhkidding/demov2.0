@@ -64,7 +64,7 @@ public class DeviceResourceService {
         JSONObject json = new JSONObject();
         json.put("key", "io.fusionapp/kind");
         json.put("op", "Eq");
-        json.put("value", "smarthome");
+        json.put("value", room);
         labelSelector.add(json);
         selectorJson.put("labelSelector", labelSelector);
         String deviceResourceInfo = httpInvoke.exchange(selectorJson.toJSONString(), DEVICE_RESOURCE_URL);
