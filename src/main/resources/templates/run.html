@@ -63,9 +63,11 @@
 
                     <div class="toggle_container">
                         <ul class="listing_detailed myul">
-                            <li id="w">体重秤              未启动</li>
-                            <li id="ac">空气净化器              未启动</li>
-                            <li id="ab">空气盒子                 未启动</li>
+                            <li id="getWeight">获取体重数据</li>
+                            <li id="video">播放锻炼视频</li>
+                            <li id="getAir">获取当前空气状态</li>
+                            <li id="airCleaner">开启空气净化</li>
+                            <li id="water">烧水</li>
 
                         </ul>
                     </div>
@@ -93,26 +95,9 @@
 </body>
 
 <script>
-    function test1() {
-        console.log(document.getElementById("w").innerText);
-        document.getElementById("w").innerHTML =" 体重秤    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
 
-    }
-    function test2() {
-        console.log(document.getElementById("ac").innerText);
-        document.getElementById("ac").innerHTML =" 空气净化器    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-
-    }
-    function test3() {
-        console.log(document.getElementById("ab").innerText);
-        document.getElementById("ab").innerHTML =" 空气盒子    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-
-    }
 
     function sendNeed() {
-        console.log(document.getElementById("w").innerText);
-        document.getElementById("w").innerHTML =" 体重秤    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-
         var Demand = document.getElementById("nd").value;
         console.log(Demand);
 
@@ -133,15 +118,13 @@
             // result 为请求的返回结果对象
             success: function (result) {
                 // alert(result);
+                // var obj = JSON.parse(str);
+                // console.log(obj.totalPrice);
+                // console.log(obj.num);
 
                 var r = confirm("竞拍价为" + result + " , 是否接受？");
                 if (r == true) {
-                     window.location.href = "/appInvoke";
-                  /*  setTimeout("test1()","2000");
-                    setTimeout("test2()","2000");
-                    setTimeout("test3()","2000");*/
-
-
+                    window.location.href = "/appInvoke";
                 } else {
                     alert("再见");
                     // window.location.href = "/app";
@@ -150,22 +133,23 @@
             }
         })
     }
+
     function sendNeed2() {
 
-                var result =46;
-                var num=4;
-                var r = confirm("当前竞拍人数为"+num+", 竞拍价为" + result + " , 是否接受？");
-                if (r == true) {
-                     window.location.href = "/appInvoke";
-                    setTimeout("test1()","2000");
-                    setTimeout("test2()","5000");
-                    setTimeout("test3()","8000");
+        var result = 46;
+        var num = 4;
+        var r = confirm("当前竞拍人数为" + num + ", 竞拍价为" + result + " , 是否接受？");
+        if (r == true) {
+            window.location.href = "/appInvoke";
+            setTimeout("test1()", "2000");
+            setTimeout("test2()", "5000");
+            setTimeout("test3()", "8000");
 
 
-                } else {
-                    alert("再见");
-                    // window.location.href = "/app";
-                }
+        } else {
+            alert("再见");
+            // window.location.href = "/app";
+        }
 
     }
 

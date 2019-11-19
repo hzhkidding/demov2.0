@@ -41,7 +41,7 @@
         }
     </script>
 </head>
-<body>
+<body onpageshow="sendNeed()">
 <div id="wrapper">
 
     <div id="content">
@@ -60,15 +60,12 @@
 
                 <div class="toogle_wrap radius8">
                     <div class="trigger"><a href="#">应用执行流程</a></div>
+                    <li id="getWeight">获取体重数据</li>
+                    <li id="video">播放锻炼视频</li>
+                    <li id="getAir">获取当前空气状态</li>
+                    <li id="airCleaner">开启空气净化</li>
+                    <li id="water">烧水</li>
 
-                    <div class="toggle_container">
-                        <ul class="listing_detailed myul">
-                            <li id="w">体重秤</li>
-                            <li id="ac">空气净化器</li>
-                            <li id="ab">空气盒子</li>
-
-                        </ul>
-                    </div>
                 </div>
                 <h4>请选择需求度：0~1</h4>
                 <div class="mydiv">
@@ -77,7 +74,7 @@
                 </div>
 
 
-                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed()">确定</a>
+                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="">确定</a>
 
                 <div class="clearfix"></div>
                 <!--                <div class="scrolltop radius20"><a onClick="jQuery('html, body').animate( { scrollTop: 0 }, 'slow' );"  href="javascript:void(0);">-->
@@ -94,32 +91,37 @@
 
 <script>
     function test1() {
-        console.log(document.getElementById("w").innerText);
-        document.getElementById("w").innerHTML = " 体重秤    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+        document.getElementById("getWeight").innerHTML = " 获取体重数据    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
 
     }
 
     function test2() {
-        console.log(document.getElementById("ac").innerText);
-        document.getElementById("ac").innerHTML = " 空气净化器    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+        document.getElementById("video").innerHTML = " 播放锻炼视频    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
 
     }
 
     function test3() {
-        console.log(document.getElementById("ab").innerText);
-        document.getElementById("ab").innerHTML = " 空气盒子    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+        document.getElementById("getAir").innerHTML = " 获取当前空气状态    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+    }
+
+    function test4() {
+        document.getElementById("airCleaner").innerHTML = " 开启空气净化    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+    }
+
+    function test5() {
+        document.getElementById("water").innerHTML = " 烧水    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
 
     }
 
     function sendNeed() {
+        console.log("999")
         setInterval("getStatus1()", 1000);
-        // if (getStatus1()) {
-        //     clearInterval(interval);
-        // }
-
         setInterval("getStatus2()", 1000);
-        // //
         setInterval("getStatus3()", 1000);
+        setInterval("getStatus4()", 1000);
+        setInterval("getStatus5()", 1000);
     }
 
     function getStatus1() {
@@ -150,6 +152,7 @@
         }
 
     }
+
     function getStatus2() {
         var exist = false;
         $.ajax({
@@ -178,6 +181,7 @@
         }
 
     }
+
     function getStatus3() {
         var exist = false;
         $.ajax({
@@ -207,6 +211,63 @@
 
     }
 
+    function getStatus4() {
+        var exist = false;
+        $.ajax({
+            url: '/getStatus',
+            async: false,
+            // 请求方式
+            type: "get",
+            // contentType
+            contentType: "application/json",
+            // dataType
+            dataType: "json",
+            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
+            // 把JS的对象或数组序列化一个json 字符串
+            // data: JSON.stringify(jsonData),
+            // result 为请求的返回结果对象
+            success: function (result) {
+                if (result == "2") {
+                    test4();
+                    exist = true;
+                    return;
+                }
+            }
+        });
+        if (exist) {
+            return true;
+        }
+
+    }
+
+    function getStatus5() {
+        var exist = false;
+        $.ajax({
+            url: '/getStatus',
+            async: false,
+            // 请求方式
+            type: "get",
+            // contentType
+            contentType: "application/json",
+            // dataType
+            dataType: "json",
+            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
+            // 把JS的对象或数组序列化一个json 字符串
+            // data: JSON.stringify(jsonData),
+            // result 为请求的返回结果对象
+            success: function (result) {
+                if (result == "2") {
+                    test5();
+                    exist = true;
+                    return;
+                }
+            }
+        });
+        if (exist) {
+            return true;
+        }
+
+    }
 
 </script>
 
