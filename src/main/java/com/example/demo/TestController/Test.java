@@ -1,6 +1,7 @@
 package com.example.demo.TestController;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -48,6 +49,12 @@ public class Test {
         return "home";
     }
 
+   /* @RequestMapping(path = {"/state"},method = RequestMethod.POST)
+    public String state(Model model,@RequestParam("app_instance_id") String jsonObject) {
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject.codePointAt("state")
+        return "home";*/
 
 
 }

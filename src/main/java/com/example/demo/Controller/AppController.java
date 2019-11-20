@@ -69,8 +69,10 @@ public class AppController {
                 appService.appInvoke();
             }
         }.start();
-        if(this.appId.equals("5dcfe456f6169f7f8ded2cb7"))
-            return "runRunning";
+        if(this.appId!=null){
+            if(this.appId.equals("5dcfe456f6169f7f8ded2cb7"))
+                return "runRunning";
+        }
         return "appRunning";
     }
 
@@ -87,6 +89,7 @@ public class AppController {
                 log.info(jsonArray.toJSONString());
                 log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
                 num++;
+                System.out.println("num"+num);
                 return "2";
             }
         }
