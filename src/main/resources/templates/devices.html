@@ -114,15 +114,20 @@
             deviceList[i][0] = xy[0];
             deviceList[i][1] = xy[1];
             //渲染颜色
-            ctx.fillStyle = colorList[deviceList[i][3]];
+            // ctx.fillStyle = colorList[deviceList[i][3]];
             // 渲染位置
-            var rectLong = 30;
+            var rectLong = 15;
             MaxRound = rectLong;
-            ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
+            // ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
             // 设置设备名称
-
+            ctx.beginPath();
+            ctx.arc(deviceList[i][0],deviceList[i][1],rectLong,0,2*Math.PI,true);
+            ctx.closePath();
+            // ctx.stroke();
+            ctx.fillStyle = colorList[deviceList[i][3]];
+            ctx.fill();
             //console.log(deviceList[i][4].length);
-            ctx.fillText(deviceList[i][4], deviceList[i][0]-10, deviceList[i][1] + 40, deviceList[i][1] + rectLong);
+            ctx.fillText(deviceList[i][4], deviceList[i][0]-MaxRound, deviceList[i][1] + MaxRound*2, deviceList[i][1] + MaxRound);
             ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
         }
@@ -143,7 +148,7 @@
         var cost;
         var deviceNo;
         for (var i = 0; i < deviceList.length; i++) {
-            if (x >= deviceList[i][0] && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1] && y <= deviceList[i][1] + MaxRound) {
+            if (x >= deviceList[i][0]-MaxRound && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1]-MaxRound && y <= deviceList[i][1] + MaxRound) {
                 deviceNo = deviceList[i][2];
                 //输入成本弹窗
                 cost = prompt("请输入成本", "￥0.0");
