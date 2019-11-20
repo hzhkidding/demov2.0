@@ -41,7 +41,7 @@
         }
     </script>
 </head>
-<body onpageshow="sendNeed3()">
+<body onpageshow="sendNeed()">
 <div id="wrapper">
 
     <div id="content">
@@ -79,7 +79,7 @@
                 </div>
 
 
-                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed3()">确定</a>
+                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed()">确定</a>
 
                 <div class="clearfix"></div>
                 <!--                <div class="scrolltop radius20"><a onClick="jQuery('html, body').animate( { scrollTop: 0 }, 'slow' );"  href="javascript:void(0);">-->
@@ -94,177 +94,32 @@
 </div>
 </body>
 <script>
-    // function sendNeed(){
-    //     var Need=document.getElementById("nd").value;
-    //
-    //     console.log(Need);
-    //     var data = { "need": Need};
-    //     var temp = document.createElement("form");
-    //     temp.action = "/sendNeed";
-    //     temp.method = "post";
-    //     temp.style.display = "none";
-    //     for (var x in data) {
-    //         var opt = document.createElement("textarea");
-    //         opt.name = x;
-    //         opt.value = data[x];
-    //         temp.appendChild(opt);
-    //     }
-    //     document.body.appendChild(temp);
-    //     temp.submit();
-    // }
-
-</script>
-
-<script>
-    function test1() {
-        // console.log(document.getElementById("mkcoffee").innerText);
-        document.getElementById("mkcoffee").innerHTML = " 制作咖啡    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-
-    }
-
-    function test2() {
-        // console.log(document.getElementById("mkcoffee").innerText);
-        document.getElementById("donecoffee").innerHTML = " 咖啡制作完成    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-
-    }
-
-    function test3() {
-        // console.log(document.getElementById("mkcoffee").innerText);
-        document.getElementById("sendcoffe").innerHTML = " 播放语音通知    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-
-    }
-
-
+    var myclear;
     function sendNeed() {
-
-        var Demand = document.getElementById("nd").value;
-        console.log(Demand);
-
-        var jsonData = {"baseprice": 36, "demand": Demand, "id": 2, "num": 4};
-
-        $.ajax({
-            url: '/sendNeed',
-            async: true,
-            // 请求方式
-            type: "post",
-            // contentType
-            contentType: "application/json",
-            // dataType
-            dataType: "json",
-            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
-            // 把JS的对象或数组序列化一个json 字符串
-            data: JSON.stringify(jsonData),
-            // result 为请求的返回结果对象
-            success: function (result) {
-                // alert(result);
-                var obj = JSON.parse(str);
-                console.log(obj.totalPrice);
-                console.log(obj.num);
-
-                var r = confirm("竞拍价为" + result + " , 是否接受？");
-                if (r == true) {
-                    window.location.href = "/appInvoke";
-                } else {
-                    alert("再见");
-                    // window.location.href = "/app";
-                }
-
-            }
-        })
+        console.log("999")
+        myclear =  setInterval("getStatus1()", 1000);
     }
-
-
-    function sendNeed3() {
-
-
-        // var interval =
-        setInterval("getStatus1()", 200);
-        // if (getStatus1()) {
-        //     clearInterval(interval);
-        // }
-
-        setInterval("getStatus2()", 300);
-        // //
-        setInterval("getStatus3()",400 );
-
-    }
-
     function getStatus1() {
         var exist = false;
         $.ajax({
             url: '/getStatus',
             async: true,
-            // 请求方式
             type: "get",
-            // contentType
             contentType: "application/json",
-            // dataType
             dataType: "json",
-            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
-            // 把JS的对象或数组序列化一个json 字符串
-            // data: JSON.stringify(jsonData),
-            // result 为请求的返回结果对象
             success: function (result) {
+                console.log(result);
+                if(result == "-1"){
+                    clearInterval(myclear);
+                }
                 if (result == "1") {
-                    test1();
-                    exist = true;
-                    return;
+                    document.getElementById("mkcoffee").innerHTML = " 制作咖啡    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
                 }
-            }
-        });
-        if (exist) {
-            return true;
-        }
-
-    }
-    function getStatus2() {
-        var exist = false;
-        $.ajax({
-            url: '/getStatus',
-            async: true,
-            // 请求方式
-            type: "get",
-            // contentType
-            contentType: "application/json",
-            // dataType
-            dataType: "json",
-            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
-            // 把JS的对象或数组序列化一个json 字符串
-            // data: JSON.stringify(jsonData),
-            // result 为请求的返回结果对象
-            success: function (result) {
                 if (result == "2") {
-                    test2();
-                    exist = true;
-                    return;
+                    document.getElementById("donecoffee").innerHTML = " 咖啡制作完成    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
                 }
-            }
-        });
-        if (exist) {
-            return true;
-        }
-
-    }
-    function getStatus3() {
-        var exist = false;
-        $.ajax({
-            url: '/getStatus',
-            async: true,
-            // 请求方式
-            type: "get",
-            // contentType
-            contentType: "application/json",
-            // dataType
-            dataType: "json",
-            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
-            // 把JS的对象或数组序列化一个json 字符串
-            // data: JSON.stringify(jsonData),
-            // result 为请求的返回结果对象
-            success: function (result) {
                 if (result == "3") {
-                    test3();
-                    exist = true;
-                    return;
+                    document.getElementById("sendcoffe").innerHTML = " 播放语音通知    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
                 }
             }
         });
@@ -273,8 +128,6 @@
         }
 
     }
-
-
 
 </script>
 

@@ -90,7 +90,7 @@
 </body>
 
 <script>
-    function test1() {
+   /* function test1() {
         document.getElementById("getWeight").innerHTML = " 获取体重数据    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
 
     }
@@ -114,17 +114,14 @@
         document.getElementById("water").innerHTML = " 烧水    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
 
     }
-
+*/ var myclear;
     function sendNeed() {
         console.log("999")
-        setInterval("getStatus1()", 100);
-        setInterval("getStatus2()", 150);
-        setInterval("getStatus3()", 200);
-        setInterval("getStatus4()", 250);
-        setInterval("getStatus5()", 300);
+        myclear =  setInterval("getStatus1()", 1000);
     }
 
     function getStatus1() {
+        console.log("test");
         var exist = false;
         $.ajax({
             url: '/getStatus',
@@ -140,10 +137,26 @@
             // data: JSON.stringify(jsonData),
             // result 为请求的返回结果对象
             success: function (result) {
+                console.log(result);
+                if(result == "-1"){
+                    clearInterval(myclear);
+
+                }
+
                 if (result == "1") {
-                    test1();
-                    exist = true;
-                    return;
+                    document.getElementById("getWeight").innerHTML = " 获取体重数据    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+                }
+                if (result == "2") {
+                    document.getElementById("video").innerHTML = " 播放锻炼视频    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+                }
+                if (result == "3") {
+                    document.getElementById("getAir").innerHTML = " 获取当前空气状态    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+                } if (result == "4") {
+                    document.getElementById("airCleaner").innerHTML = " 开启空气净化    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
+
+                } if (result == "5") {
+                    document.getElementById("water").innerHTML = " 烧水    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
                 }
             }
         });
@@ -153,7 +166,17 @@
 
     }
 
-    function getStatus2() {
+
+
+
+
+
+
+
+
+
+
+  /*  function getStatus2() {
         var exist = false;
         $.ajax({
             url: '/getStatus',
@@ -267,7 +290,7 @@
             return true;
         }
 
-    }
+    }*/
 
 </script>
 

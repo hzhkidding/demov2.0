@@ -85,12 +85,17 @@ public class AppController {
 
         if(num != jsonArray.size()) {
             JSONObject jsonObject = jsonArray.getJSONObject(num);
+            log.info(jsonObject.getString("state"));
             if (jsonObject.getString("state").equals("2")) {
                 log.info(jsonArray.toJSONString());
                 log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
                 num++;
+                log.info(String.valueOf(num));
                 return String.valueOf(num);
             }
+        }
+        if(num == jsonArray.size()){
+            return "-1";
         }
         return "0";
     }
