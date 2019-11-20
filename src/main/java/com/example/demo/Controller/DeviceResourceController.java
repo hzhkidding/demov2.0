@@ -35,12 +35,16 @@ public class DeviceResourceController {
             if(d.getX() == null || d.getY()==null||d.getKind().equals("Human")){
                 continue;
             }
+
             device.add(d.getX().doubleValue());
             device.add(d.getY().doubleValue());
             device.add(d.getId());
             device.add(d.getStatus());
+            if(d.getDeviceName() == null){
+                device.add("设备");
+            }
             device.add(d.getDeviceName());
-            System.out.println(d.getDeviceName());
+            System.out.println(d.getY()+d.getId()+d.getStatus()+d.getDeviceName());
             devices.add(device);
         }
         model.addAttribute("DeviceList", devices);

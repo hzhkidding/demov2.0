@@ -97,7 +97,7 @@ public class AppService {
     }
     //应用调用
     public void appInvoke(){
-
+        appController.num = 0;
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_instance_id",this.appInstanceId);
         HttpHeaders headers = new HttpHeaders();

@@ -117,18 +117,18 @@
 
     function sendNeed() {
         console.log("999")
-        setInterval("getStatus1()", 1000);
-        setInterval("getStatus2()", 1000);
-        setInterval("getStatus3()", 1000);
-        setInterval("getStatus4()", 1000);
-        setInterval("getStatus5()", 1000);
+        setInterval("getStatus1()", 100);
+        setInterval("getStatus2()", 150);
+        setInterval("getStatus3()", 200);
+        setInterval("getStatus4()", 250);
+        setInterval("getStatus5()", 300);
     }
 
     function getStatus1() {
         var exist = false;
         $.ajax({
             url: '/getStatus',
-            async: false,
+            async: true,
             // 请求方式
             type: "get",
             // contentType
@@ -140,7 +140,7 @@
             // data: JSON.stringify(jsonData),
             // result 为请求的返回结果对象
             success: function (result) {
-                if (result == "2") {
+                if (result == "1") {
                     test1();
                     exist = true;
                     return;
@@ -157,7 +157,7 @@
         var exist = false;
         $.ajax({
             url: '/getStatus',
-            async: false,
+            async: true,
             // 请求方式
             type: "get",
             // contentType
@@ -186,7 +186,7 @@
         var exist = false;
         $.ajax({
             url: '/getStatus',
-            async: false,
+            async: true,
             // 请求方式
             type: "get",
             // contentType
@@ -198,7 +198,7 @@
             // data: JSON.stringify(jsonData),
             // result 为请求的返回结果对象
             success: function (result) {
-                if (result == "2") {
+                if (result == "3") {
                     test3();
                     exist = true;
                     return;
@@ -215,7 +215,7 @@
         var exist = false;
         $.ajax({
             url: '/getStatus',
-            async: false,
+            async: true,
             // 请求方式
             type: "get",
             // contentType
@@ -227,7 +227,7 @@
             // data: JSON.stringify(jsonData),
             // result 为请求的返回结果对象
             success: function (result) {
-                if (result == "2") {
+                if (result == "4") {
                     test4();
                     exist = true;
                     return;
@@ -244,7 +244,7 @@
         var exist = false;
         $.ajax({
             url: '/getStatus',
-            async: false,
+            async: true,
             // 请求方式
             type: "get",
             // contentType
@@ -256,7 +256,7 @@
             // data: JSON.stringify(jsonData),
             // result 为请求的返回结果对象
             success: function (result) {
-                if (result == "2") {
+                if (result == "5") {
                     test5();
                     exist = true;
                     return;

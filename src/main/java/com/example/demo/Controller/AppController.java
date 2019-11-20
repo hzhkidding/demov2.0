@@ -27,7 +27,7 @@ import static com.example.demo.Util.Constans.APP_STATUS_URL;
 public class AppController {
     private String appId;
 
-   private int num = 0;
+   public int num = 0;
     @Autowired
     HttpInvoke httpInvoke;
 
@@ -51,8 +51,8 @@ public class AppController {
 
     @RequestMapping(path = {"/appInstance"}, method = RequestMethod.POST)
     public String appInstance(@RequestParam("appId") String appId, @RequestParam("userId") String userId) {
-        if (appId.equals("5dcfe456f6169f7f8ded2cb7")){
-            this.appId = "5dcfe456f6169f7f8ded2cb7";
+        if (appId.equals("5dd3ff408c905d4c24bf6898")){
+            this.appId = "5dd3ff408c905d4c24bf6898";
             appService.appInstance(appId, userId, this.X, this.Y);
             return "run";
         }
@@ -70,7 +70,7 @@ public class AppController {
             }
         }.start();
         if(this.appId!=null){
-            if(this.appId.equals("5dcfe456f6169f7f8ded2cb7"))
+            if(this.appId.equals("5dd3ff408c905d4c24bf6898"))
                 return "runRunning";
         }
         return "appRunning";
@@ -89,8 +89,7 @@ public class AppController {
                 log.info(jsonArray.toJSONString());
                 log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
                 num++;
-                System.out.println("num"+num);
-                return "2";
+                return String.valueOf(num);
             }
         }
         return "0";
